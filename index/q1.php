@@ -1,6 +1,6 @@
 <?php
-require_once 'includes/a1.php';
-require_once 'includes/vars.php';
+require_once '../a1.php';
+require_once '../vars.php';
 ?>
 
 <table>
