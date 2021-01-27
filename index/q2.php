@@ -1,7 +1,7 @@
 <?php
-require_once 'includes/a1.php';
-require_once 'includes/a2.php';
-require_once 'includes/vars.php';
+require_once '../a1.php';
+require_once '../a2.php';
+require_once '../vars.php';
 ?>
 
 <table>
