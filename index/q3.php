@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'includes/a3.php';
+require_once '../a3.php';
 
 switch( $_POST["_method"] ) {
 
@@ -24,7 +24,7 @@ switch( $_POST["_method"] ) {
 ?>
 
 <form method="post">
-	<input type="hidden" name="_method" value="post" />
+	<input type="hidden" name="_method" value="post">
 	<h3>Customer Info:</h3>
 <?php
 $cart->printHTML();
@@ -32,7 +32,7 @@ $cart->printHTML();
 	<button type="submit">Apply Changes</button>
 </form>
 <form method="post">
-	<input type="hidden" name="_method" value="put" />
+	<input type="hidden" name="_method" value="put">
 	<h3>New Item:</h3>
 <?php
 	$cart->Form();
