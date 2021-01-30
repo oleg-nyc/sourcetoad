@@ -1,6 +1,6 @@
 <?php
 function GetShippingRate($address){
-	if( isset($address) ){
+	if( !empty($address) ){
 		return rand(1,99);
 	}
 	else return 0;
@@ -22,7 +22,7 @@ class Customer {
 	protected $html = [];
 	protected $address = "";
 	protected $customer_structure = ['first_name', 'last_name', 'address' ];
-	
+
 	public function __construct($data = false){
 		if( !isset($_SESSION['customer']) || !is_array($_SESSION['customer']) || count($_SESSION['customer']) < 1 )
 			$_SESSION['customer'] = $this->def;
@@ -52,14 +52,14 @@ class Customer {
 		if( !is_array($this->html) ){
 			echo "wrong format";
 			return false;
-		} 
+		}
 		foreach( $this->html as $k => $v ){
 			$name = isset($key) && strlen($key) > 0 ? $key : $k;
 			if( !is_array($v) ) {
 				//$name = isset($this->label[$k]) ? $this->label[$k] : '';
                      echo "<input name='". $name ."' value='" . $v  . "'>";
 			}
-			else 
+			else
 				$this->printHTML($v, $name);
 		}
 	}
@@ -70,7 +70,7 @@ class Cart extends Customer {
 	protected $structure = ['id', 'name', 'price', 'quantity' ];
 	protected $tax_rate = 7; //
 	protected $items = [];
-	
+
 	public function __construct($data = false, $customer_data = false){
 		parent::__construct($customer_data);
 		if( $data ) {
@@ -86,21 +86,21 @@ class Cart extends Customer {
 		}
 		$this->items = isset($_SESSION['cart']) && count($_SESSION['cart']) > 0 ? $_SESSION['cart'] : [] ;
 	}
-	
+
 	public function Form(){
 		foreach( $this->required_feilds as $name => $type){
 			echo "<input type='". $type ."' name='". $name ."' placeholder='". $name ."' required>";
 		}
 	}
-	
+
 	public function deleteItem($id){
 		unset($this->items[$id]);
 		$_SESSION['cart'] = $this->items;
 	}
-	
+
 	public function printCart(){
 		$colspan = count($this->structure);
-		if( !isset($this->items) || !is_array($this->items) || count($this->items) < 1 ) { 
+		if( !isset($this->items) || !is_array($this->items) || count($this->items) < 1 ) {
 			echo "<tr><td align='center' colspan='". ($colspan + 1) ."'>Your Cart is empty.</td></tr>";
 			return false;
 		}
